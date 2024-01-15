@@ -1,4 +1,20 @@
 -- Who was the leading home run hitter for each team in 2019?
+
+SELECT teams.name, players.first_name, players.last_name, MAX(stats.home_runs)
+FROM stats 
+    INNER JOIN teams ON teams.id = stats.team_id
+    INNER JOIN players ON stats.player_id = players.id
+WHERE teams.year = 2019
+GROUP BY teams.name;
+
+-- Question: I'm not sure I understand how by adding GROUP BY teams.name gave us the
+-- correct answer. Without that last name is how I got the answer to lab-4-3, but was
+-- that the incorrect way?
+
+-- Answer: By adding GROUP BY gives you the stats at whatever level you, you can get the max
+-- home runs by team or by first name, e.g. out of all the zacks', you are collecting
+-- the data at that level
+
 -- NOTE: need more advanced SQL to answer this question without
 --       raising a warning: "Field of aggregated query neither grouped nor aggregated"
 
